@@ -54,7 +54,7 @@ public class KingfisherSource: NSObject, InputSource {
     /// - Parameters:
     ///   - imageView: UIImageView that receives the loaded image
     ///   - callback: Completion callback with an optional image
-    @objc
+    @MainActor @objc
     public func load(to imageView: UIImageView, with callback: @escaping (UIImage?) -> Void) {
         imageView.kf.setImage(with: self.url, placeholder: self.placeholder, options: self.options, progressBlock: nil) { result in
             switch result {
@@ -69,6 +69,7 @@ public class KingfisherSource: NSObject, InputSource {
     /// Cancel an image download task
     ///
     /// - Parameter imageView: UIImage view with the download task that should be canceled
+    @MainActor
     public func cancelLoad(on imageView: UIImageView) {
         imageView.kf.cancelDownloadTask()
     }
